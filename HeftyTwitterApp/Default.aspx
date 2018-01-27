@@ -12,6 +12,6 @@
   Second Search Term:<br>
   <input type="text" name="search2">
     <br />
-  <input type="submit" value="Search ">
+  <input type="submit" value="Search">
 
 </asp:Content>
