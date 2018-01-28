@@ -18,12 +18,15 @@ namespace HeftyTwitterApp
             string srch2 = util.CleanInput(search2.Text);
 
             //search twitter
+            MyTwitterObj MyTwitter = new MyTwitterObj();
+            MyTwitter.search_1 = srch1;
+            MyTwitter.search_2 = srch2;
             Twitter twitter = new Twitter();
-            twitter.GetTweets(srch1, srch2);
+            MyTwitter = twitter.GetData(MyTwitter);
 
             //store in DB
             DBInteractions DBI = new DBInteractions();
-            DBI.StoreInDB(search1.Text, search2.Text);
+            DBI.StoreInDB(search1.Text, MyTwitter.tweets_1, search2.Text, MyTwitter.tweets_2);
         }
     }
 }
