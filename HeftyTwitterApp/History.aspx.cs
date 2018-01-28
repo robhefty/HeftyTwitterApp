@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Text;
 using System.Web.UI.WebControls;
 
@@ -14,7 +12,8 @@ namespace HeftyTwitterApp
             if (!this.IsPostBack)
             {
                 //Populating a DataTable from database.
-                DataTable dt = this.GetData();
+                DBInteractions DBI = new DBInteractions();
+                DataTable dt = DBI.GetData();
 
                 //Building an HTML string.
                 StringBuilder html = new StringBuilder();
@@ -50,27 +49,6 @@ namespace HeftyTwitterApp
 
                 //Append the HTML string to Placeholder.
                 PlaceHolder1.Controls.Add(new Literal { Text = html.ToString() });
-            }
-        }
-
-        private DataTable GetData()
-        {
-            string connstr = ConfigurationManager.ConnectionStrings["ConnStr"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connstr))
-            {
-                using (SqlCommand cmd = new SqlCommand("SELECT search1, tweets1, search2, tweets2, seconds, dtm from searches order by dtm desc;"))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
-                    {
-                        cmd.Connection = con;
-                        sda.SelectCommand = cmd;
-                        using (DataTable dt = new DataTable())
-                        {
-                            sda.Fill(dt);
-                            return dt;
-                        }
-                    }
-                }
             }
         }
     }

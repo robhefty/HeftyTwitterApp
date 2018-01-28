@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace HeftyTwitterApp.App_Code
+namespace HeftyTwitterApp
 {
     public class Twitter
     {
-        public void GetTweets()
+        public void GetTweets(string search1, string search2, string max_id="0", string since_id ="0")
         {
-            // You need to set your own keys and screen name
-            string oAuthConsumerKey = "iGArkVBkkvVgVgqTtgjj356HA";
-            var oAuthConsumerSecret = "mcKrdyq3benfSOPOBBa5htBncDjdPKtoQo9ZOsHnAwj9Xx99sG";
-            var oAuthUrl = "https://api.twitter.com/oauth2/token";
-            var screenname = "robhefty";
+            // set the keys
+            string oAuthConsumerKey = ConfigurationManager.AppSettings["TwitterKey"];
+            var oAuthConsumerSecret = ConfigurationManager.AppSettings["TwitterSecret"];
+            var oAuthUrl = ConfigurationManager.AppSettings["TwitterAuthURL"];
 
-            // Do the Authenticate
+            // authenticate
             var authHeaderFormat = "Basic {0}";
 
             var authHeader = string.Format(authHeaderFormat,
@@ -26,7 +26,8 @@ namespace HeftyTwitterApp.App_Code
 
             var postBody = "grant_type=client_credentials";
 
-            System.Net.HttpWebRequest authRequest = (HttpWebRequest)WebRequest.Create(oAuthUrl);
+            //create request
+            HttpWebRequest authRequest = (HttpWebRequest)WebRequest.Create(oAuthUrl);
             authRequest.Headers.Add("Authorization", authHeader);
             authRequest.Method = "POST";
             authRequest.ContentType = "application/x-www-form-urlencoded;charset=UTF-8";
@@ -40,22 +41,22 @@ namespace HeftyTwitterApp.App_Code
 
             authRequest.Headers.Add("Accept-Encoding", "gzip");
 
+            // deserialize
             WebResponse authResponse = authRequest.GetResponse();
-            // deserialize into an object
             TwitAuthenticateResponse twitAuthResponse;
             using (authResponse)
             {
                 using (var reader = new StreamReader(authResponse.GetResponseStream()))
                 {
-                    //JavaScriptSerializer js = new JavaScriptSerializer();
                     var objectText = reader.ReadToEnd();
                     twitAuthResponse = JsonConvert.DeserializeObject<TwitAuthenticateResponse>(objectText);
                 }
             }
 
             // Do the search
-            var searchFormat = "https://api.twitter.com/1.1/search/tweets.json?q={0}&count=10&result_type=popular";
-            var searchURL = string.Format(searchFormat, "trainspotting");
+            string maxResults = ConfigurationManager.AppSettings["TwitterMaxResults"];
+            var searchFormat = ConfigurationManager.AppSettings["TwitterSearchURL"];
+            var searchURL = string.Format(searchFormat, search1, maxResults);
             HttpWebRequest searchRequest = (HttpWebRequest)WebRequest.Create(searchURL);
             var timelineHeaderFormat = "{0} {1}";
             searchRequest.Headers.Add("Authorization", string.Format(timelineHeaderFormat, twitAuthResponse.token_type, twitAuthResponse.access_token));
