@@ -1,17 +1,21 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HeftyTwitterApp._Default" %>
+﻿<%@ Page Title="Hefty Twitter App" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HeftyTwitterApp._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
         <h1>Hefty Twitter App</h1>
-        <p>This will compare the popularity of two terms or phrases in Twitter</p>
+        <p>Compare the popularity of two terms or phrases on Twitter</p>
     </div>
 
   First Search Term:<br>
-  <input type="text" name="search1"><br>
+    <asp:TextBox ID="search1" runat="server" /><br />
   Second Search Term:<br>
-  <input type="text" name="search2">
+    <asp:TextBox ID="search2" runat="server" /><br />
+    <asp:Button ID="submitsearch" runat="server" Text="Search" onclick="submitsearch_Click" />
     <br />
-  <input type="submit" value="Search">
+    <div>
+        <asp:HyperLink id="historyLink" NavigateUrl="/history.aspx" Text="View History" runat="server"/> 
+    </div>
+    
 
 </asp:Content>

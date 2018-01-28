@@ -8,8 +8,6 @@ namespace HeftyTwitterApp.App_Code
 {
     public class Twitter
     {
-        string test = "";
-
         public void GetTweets()
         {
             // You need to set your own keys and screen name
