@@ -8,7 +8,10 @@ namespace HeftyTwitterApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            tweets1.Visible = false;
+            tweets2.Visible = false;
+            seconds1.Visible = false;
+            seconds2.Visible = false;
         }
 
         protected void submitsearch_Click(object sender, EventArgs e)
