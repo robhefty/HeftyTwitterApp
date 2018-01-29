@@ -62,7 +62,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-    <p><a href="https://github.com/robhefty/TwitterApp">Github Source</a></p>
+    <p><a href="https://github.com/robhefty/HeftyTwitterApp">Github Source</a></p>
         </div>
 
     </form>
