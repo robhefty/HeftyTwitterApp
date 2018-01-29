@@ -10,7 +10,7 @@
     <title>History | Hefty Twitter App</title>
 </head>
 <body>
-    <asp:PlaceHolder ID="PlaceHolder1" runat="server" />
     <asp:HyperLink id="home" NavigateUrl="/" Text="Search Again" runat="server"/> 
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server" />
 </body>
 </html>
