@@ -145,6 +145,7 @@
     <None Include="Properties\PublishProfiles\HeftyTwitterApp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="History.aspx" />
+    <Content Include="Results.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -183,6 +184,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBInteractions.cs" />
+    <Compile Include="Results.aspx.cs">
+      <DependentUpon>Results.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Results.aspx.designer.cs">
+      <DependentUpon>Results.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Twitter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

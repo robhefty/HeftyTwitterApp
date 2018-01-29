@@ -12,6 +12,9 @@ namespace HeftyTwitterApp
     {
         public MyTwitterObj GetData(MyTwitterObj myTwitter)
         {
+            DateTime dtm = new DateTime();
+            dtm = DateTime.Now;
+
             //first search:
             TwitterHelper helper1 = new TwitterHelper
             {
@@ -20,21 +23,34 @@ namespace HeftyTwitterApp
                 since_id = 0,
                 count = 0
             };
-            
-            RootObject root1 = GetTweets(helper1);
-            if (root1.statuses.Count > 0)
-            {
-                //if (root1.statuses.Count == Int32.Parse(ConfigurationManager.AppSettings["TwitterMaxResults"]))
-                //{
 
-                //}
-                foreach (Status value in root1.statuses)
+            RootObject root = new RootObject();
+            root = GetTweets(helper1);
+            while (root.statuses.Count > 0)
+            {
+                if (root.statuses.Count == Int32.Parse(ConfigurationManager.AppSettings["TwitterMaxResults"]))
                 {
-                    helper1.count = helper1.count + value.favorite_count + value.retweet_count + 1;
+                    // there are more tweets than we can process in one batch -- loop
+                    foreach (Status value in root.statuses)
+                    {
+                        helper1.count = helper1.count + value.retweet_count + 1;
+                    }
+                    helper1.max_id = root.statuses[99].id; // oldest tweet in collection
+                    root = GetTweets(helper1);
+                }
+                else
+                {
+                    // there is less than the maximum amount of tweets -- no need to loop
+                    foreach (Status value in root.statuses)
+                    {
+                        helper1.count = helper1.count + value.retweet_count + 1;
+                        helper1.created = value.created_at;
+                    }
+                break;
                 }
             }
 
-            //second search: 
+            //second search:
             TwitterHelper helper2 = new TwitterHelper
             {
                 search = myTwitter.search_2,
@@ -43,12 +59,29 @@ namespace HeftyTwitterApp
                 count = 0
             };
 
-            RootObject root2 = GetTweets(helper2);
-            if (root2.statuses.Count > 0)
+            root = new RootObject();
+            root = GetTweets(helper2);
+            while (root.statuses.Count > 0)
             {
-                foreach (Status value in root2.statuses)
+                if (root.statuses.Count == Int32.Parse(ConfigurationManager.AppSettings["TwitterMaxResults"]))
                 {
-                    helper2.count = helper2.count + value.favorite_count + value.retweet_count + 1;
+                    // there are more tweets than we can process in one batch -- loop
+                    foreach (Status value in root.statuses)
+                    {
+                        helper2.count = helper2.count + value.retweet_count + 1;
+                    }
+                    helper2.max_id = root.statuses[99].id; // oldest tweet in collection
+                    root = GetTweets(helper2);
+                }
+                else
+                {
+                    // there is less than the maximum amount of tweets -- no need to loop
+                    foreach (Status value in root.statuses)
+                    {
+                        helper2.count = helper2.count + value.retweet_count + 1;
+                        helper2.created = value.created_at;
+                    }
+                    break;
                 }
             }
 
@@ -58,6 +91,24 @@ namespace HeftyTwitterApp
             RetTwitterObj.search_2 = myTwitter.search_2;
             RetTwitterObj.tweets_1 = helper1.count;
             RetTwitterObj.tweets_2 = helper2.count;
+            if (helper1.created == null)
+            {
+                RetTwitterObj.seconds_1 = 0;
+            }
+            else
+            {
+                DateTime date1 = DateTime.ParseExact(helper1.created, "ddd MMM dd HH:mm:ss zzz yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                RetTwitterObj.seconds_1 = Convert.ToInt32((dtm - date1).TotalSeconds);
+            }
+            if (helper2.created == null)
+            {
+                RetTwitterObj.seconds_2 = 0;
+            }
+            else
+            {
+                DateTime date2 = DateTime.ParseExact(helper2.created, "ddd MMM dd HH:mm:ss zzz yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                RetTwitterObj.seconds_2 = Convert.ToInt32((dtm - date2).TotalSeconds);
+            }
             return RetTwitterObj;
         }
 
@@ -130,9 +181,10 @@ namespace HeftyTwitterApp
     public class TwitterHelper
     {
         public string search { get; set; }
-        public int max_id { get; set; }
-        public int since_id { get; set; }
+        public long max_id { get; set; }
+        public long since_id { get; set; }
         public int count { get; set; }
+        public string created { get; set; }
     }
 
     public class MyTwitterObj
@@ -141,7 +193,8 @@ namespace HeftyTwitterApp
         public int tweets_1 { get; set; }
         public string search_2 { get; set; }
         public int tweets_2 { get; set; }
-        public int seconds { get; set; }
+        public int seconds_1 { get; set; }
+        public int seconds_2 { get; set; }
     }
 
     public class TwitAuthenticateResponse
@@ -154,9 +207,9 @@ namespace HeftyTwitterApp
     {
         //public string screen_name { get; set; }
         //public string name { get; set; }
-        public int id { get; set; }
-        public string id_str { get; set; }
-        public List<int> indices { get; set; }
+        //public int id { get; set; }
+        //public string id_str { get; set; }
+        //public List<int> indices { get; set; }
     }
 
     //public class Entities
@@ -299,8 +352,8 @@ namespace HeftyTwitterApp
     //    public string translator_type { get; set; }
     //}
 
-    public class RetweetedStatus
-    {
+    //public class RetweetedStatus
+    //{
         //public string created_at { get; set; }
         //public long id { get; set; }
         //public string id_str { get; set; }
@@ -320,18 +373,18 @@ namespace HeftyTwitterApp
         //public object place { get; set; }
         //public object contributors { get; set; }
         //public bool is_quote_status { get; set; }
-        public int retweet_count { get; set; }
-        public int favorite_count { get; set; }
+        //public int retweet_count { get; set; }
+        //public int favorite_count { get; set; }
         //public bool favorited { get; set; }
-        public bool retweeted { get; set; }
+        //public bool retweeted { get; set; }
         //public string lang { get; set; }
-    }
+    //}
 
     public class Status
     {
         public string created_at { get; set; }
         public long id { get; set; }
-        public string id_str { get; set; }
+        //public string id_str { get; set; }
         //public string text { get; set; }
         //public bool truncated { get; set; }
         //public Entities entities { get; set; }
@@ -347,30 +400,30 @@ namespace HeftyTwitterApp
         //public object coordinates { get; set; }
         //public object place { get; set; }
         //public object contributors { get; set; }
-        public RetweetedStatus retweeted_status { get; set; }
+        //public RetweetedStatus retweeted_status { get; set; }
         //public bool is_quote_status { get; set; }
         public int retweet_count { get; set; }
         public int favorite_count { get; set; }
-        public bool favorited { get; set; }
-        public bool retweeted { get; set; }
+        //public bool favorited { get; set; }
+        //public bool retweeted { get; set; }
         //public string lang { get; set; }
     }
 
-    public class SearchMetadata
-    {
-        public double completed_in { get; set; }
-        public int max_id { get; set; }
-        public string max_id_str { get; set; }
-        public string next_results { get; set; }
-        public string query { get; set; }
-        public int count { get; set; }
-        public int since_id { get; set; }
-        public string since_id_str { get; set; }
-    }
+    //public class SearchMetadata
+    //{
+    //    public double completed_in { get; set; }
+    //    public int max_id { get; set; }
+    //    public string max_id_str { get; set; }
+    //    public string next_results { get; set; }
+    //    public string query { get; set; }
+    //    public int count { get; set; }
+    //    public int since_id { get; set; }
+    //    public string since_id_str { get; set; }
+    //}
 
     public class RootObject
     {
         public List<Status> statuses { get; set; }
-        public SearchMetadata search_metadata { get; set; }
+        //public SearchMetadata search_metadata { get; set; }
     }
 }

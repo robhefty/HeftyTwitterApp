@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 
 namespace HeftyTwitterApp
@@ -26,7 +27,17 @@ namespace HeftyTwitterApp
 
             //store in DB
             DBInteractions DBI = new DBInteractions();
-            DBI.StoreInDB(search1.Text, MyTwitter.tweets_1, search2.Text, MyTwitter.tweets_2);
+            DBI.StoreInDB(search1.Text, MyTwitter.tweets_1, search2.Text, MyTwitter.tweets_2, MyTwitter.seconds_1, MyTwitter.seconds_2);
+
+            //go to next page
+            HttpContext CurrContext = HttpContext.Current;
+            CurrContext.Items.Add("srch1", search1.Text);
+            CurrContext.Items.Add("srch2", search2.Text);
+            CurrContext.Items.Add("tweets1", MyTwitter.tweets_1);
+            CurrContext.Items.Add("tweets2", MyTwitter.tweets_2);
+            CurrContext.Items.Add("seconds1", MyTwitter.seconds_1);
+            CurrContext.Items.Add("seconds2", MyTwitter.seconds_2);
+            Server.Transfer("Results.aspx");
         }
     }
 }

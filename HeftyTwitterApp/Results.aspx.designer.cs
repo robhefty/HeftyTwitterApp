@@ -10,7 +10,7 @@
 namespace HeftyTwitterApp {
     
     
-    public partial class _Default {
+    public partial class Results {
         
         /// <summary>
         /// search1 control.
@@ -22,6 +22,15 @@ namespace HeftyTwitterApp {
         protected global::System.Web.UI.WebControls.TextBox search1;
         
         /// <summary>
+        /// tmp1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tmp1;
+        
+        /// <summary>
         /// search2 control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,22 @@ namespace HeftyTwitterApp {
         protected global::System.Web.UI.WebControls.TextBox search2;
         
         /// <summary>
-        /// submitsearch control.
+        /// tmp2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitsearch;
+        protected global::System.Web.UI.WebControls.TextBox tmp2;
+        
+        /// <summary>
+        /// home control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink home;
         
         /// <summary>
         /// historyLink control.
@@ -47,41 +65,5 @@ namespace HeftyTwitterApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink historyLink;
-        
-        /// <summary>
-        /// tweets1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tweets1;
-        
-        /// <summary>
-        /// tweets2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tweets2;
-        
-        /// <summary>
-        /// seconds1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox seconds1;
-        
-        /// <summary>
-        /// seconds2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox seconds2;
     }
 }

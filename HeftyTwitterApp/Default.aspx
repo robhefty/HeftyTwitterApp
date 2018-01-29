@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>Hefty Twitter App</h1>
+        <h2>Hefty Twitter App</h2>
         <p>Compare the popularity of two terms or phrases on Twitter</p>
     </div>
 
@@ -15,6 +15,12 @@
     <br />
     <div>
         <asp:HyperLink id="historyLink" NavigateUrl="/history.aspx" Text="View History" runat="server"/> 
+    </div>
+    <div class="hidden">
+        <asp:TextBox ID="tweets1" runat="server" /><br />
+        <asp:TextBox ID="tweets2" runat="server" /><br />
+        <asp:TextBox ID="seconds1" runat="server" /><br />
+        <asp:TextBox ID="seconds2" runat="server" /><br />
     </div>
     
 

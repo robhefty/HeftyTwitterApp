@@ -7,7 +7,7 @@ namespace HeftyTwitterApp
     class DBInteractions
     {
         Utility util = new Utility();
-        public void StoreInDB(string search1,int count1, string search2, int count2)
+        public void StoreInDB(string search1, int count1, string search2, int count2, double seconds1, double seconds2)
         {
             if (search1.Length > 0 && search2.Length > 0)
             {
@@ -23,7 +23,8 @@ namespace HeftyTwitterApp
                         cmd.Parameters.AddWithValue("@tweets1", count1);
                         cmd.Parameters.AddWithValue("@search2", search2);
                         cmd.Parameters.AddWithValue("@tweets2", count2);
-                        cmd.Parameters.AddWithValue("@seconds", "34");
+                        cmd.Parameters.AddWithValue("@seconds1", seconds1);
+                        cmd.Parameters.AddWithValue("@seconds2", seconds2);
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
