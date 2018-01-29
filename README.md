@@ -1,0 +1,10 @@
+TwitterApp
+Dev Code Challenge of Challenging Coding Overall Goal Create a web application that compares the Twitter popularity for 2 words or phrases. The application should also display a history/log of comparisons. The project description is pretty general on purpose because we want to see how you interpret it and make it unique. This is your chance to show your creativity and ability to create solutions. We expect this to take about 8-10 hours. Upload your solution to a public repository on github.com and send us the link. Things to note ● Implement this as a website in any programming language and database you want but must have instructions on how to run locally if not a .NET Web Application and SQL Server. ● You can use any library, frameworks, and tools to help you along. ● Visual design will not be judged, but we do expect clean, semantic markup, well organized CSS (if any), and a relatively intuitive user experience.
+
+Bonus : Use git from the beginning to have a full commit history and just send us the link to a public repo. Extra Bonus: Send us a link to the live version of your solution. For example, create a free Azure account and host it as a free website.
+
+Requirements: Create a web application that compares the Twitter popularity for 2 words or phrases. The application should also display a history/log of comparisons. Use git from the beginning to have a full commit history and just send us the link to a public repo. Create a free Azure account and host it as a free website.
+
+Assumptions: Popularity of search terms is based on tweets per second. This will be a public web application -- there is no need for security. It will only allow HTTPS traffic but will not necessarily have a site certificate.
+
+Design: This application will employ ASP.Net with logic written in C#. It will be designed adhere to the MVC principles. It will store data in a SQL Server database. It will interface with the Twitter API via RESTful interactions. The GUI will be a bootstrap theme and will contain modern security tactics to deter unwanted manipulation (SQL injection, cross-site scripting, etc.).
