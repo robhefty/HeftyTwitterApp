@@ -51,5 +51,10 @@ namespace HeftyTwitterApp
                 PlaceHolder1.Controls.Add(new Literal { Text = html.ToString() });
             }
         }
+
+        protected void back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("default.aspx");
+        }
     }
 }

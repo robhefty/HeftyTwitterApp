@@ -13,13 +13,13 @@ namespace HeftyTwitterApp {
     public partial class History {
         
         /// <summary>
-        /// home control.
+        /// back control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink home;
+        protected global::System.Web.UI.WebControls.Button back;
         
         /// <summary>
         /// PlaceHolder1 control.

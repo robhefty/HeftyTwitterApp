@@ -7,7 +7,9 @@
         <p>All comparision results</p>
     </div>
     <div class="content-wrapper main-content clear-fix">
-        <asp:HyperLink ID="home" NavigateUrl="/" Text="Search Again" runat="server" />
+        <asp:Button ID="back" Text="Search Again" runat="server" OnClick="back_Click" />
+        <br />
+        <br />
         <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
     </div>
 </asp:Content>
