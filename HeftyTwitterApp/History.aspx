@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h2>Hefty Twitter App History</h2>
+        <h2>Hefty Twitter App</h2>
         <p>All comparision results</p>
     </div>
     <div class="content-wrapper main-content clear-fix">
