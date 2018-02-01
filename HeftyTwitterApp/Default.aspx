@@ -8,9 +8,9 @@
     </div>
 
     First Search Term:<br>
-    <asp:TextBox ID="search1" runat="server" /><br />
+    <asp:TextBox ID="search1" runat="server" required /><br />
     Second Search Term:<br>
-    <asp:TextBox ID="search2" runat="server" /><br />
+    <asp:TextBox ID="search2" runat="server" required /><br />
     <br />
     <asp:Button ID="submitsearch" runat="server" Text="Search" OnClick="submitsearch_Click" />
     <br />
